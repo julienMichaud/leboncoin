@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}annonces{% endblock title %}
+
+{% block content %}
+  {% for annonce in object_list %}
+    <div class="card">
+      <div class="card-header">
+        <span class="font-weight-bold">{{ annonce.title }}</span> &middot;
+        <span class="text-muted">by {{ annonce.author }} | {{ annonce.date }}</span>
+      </div>
+      <div class="card-body">
+        <p>{{ annonce.body }}</p>
+      </div>
+    </div>
+    <br />
+  {% endfor %}
+{% endblock content %}
