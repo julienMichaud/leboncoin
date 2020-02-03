@@ -38,10 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'storages',
     'pages.apps.PagesConfig',
     'accounts.apps.AccountsConfig',
-    'annonces.apps.AnnoncesConfig'
+    'annonces.apps.AnnoncesConfig',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -129,27 +129,24 @@ LOGOUT_REDIRECT_URL = 'home'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 
-#https://testdriven.io/blog/storing-django-static-and-media-files-on-amazon-s3/
 
-USE_S3 = os.getenv('USE_S3') == 'True'
+## s3 settings ##
 
-if USE_S3:
-    # aws settings
-    AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
-    AWS_DEFAULT_ACL = 'public-read'
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-    # s3 static settings
-    AWS_LOCATION = 'static'
-    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-else:
-    STATIC_URL = '/staticfiles/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_DEFAULT_ACL = 'public-read'
+AWS_S3_FILE_OVERWRITE = False
+AWS_IS_GZIPPED = True
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'files'
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+AWS_S3_REGION_NAME = 'eu-west-3'
 
-MEDIA_URL = '/mediafiles/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
+
+AWS_S3_ENDPOINT_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.eu-west-3.amazonaws.com"
+STATIC_ROOT = 'static'
+MEDIA_ROOT = 'media'
+STATIC_URL = f"https://{AWS_STORAGE_BUCKET_NAME}/{STATIC_ROOT}/"
+MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}/{MEDIA_ROOT}/"
