@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1>New annonce</h1>
-    <form action="" method="post">{% csrf_token %}
+    <form enctype="multipart/form-data" method="post">{% csrf_token %}
       {{ form.as_p }}
       <button class="btn btn-success ml-2" type="submit">Save</button>
     </form>

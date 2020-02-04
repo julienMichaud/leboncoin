@@ -13,7 +13,7 @@ class Annonce(models.Model):
     category = models.CharField(choices=categoryChoices, max_length=20)
     price = models.DecimalField(max_digits=6, decimal_places=2, default=0)
     description = models.CharField(max_length=200)
-    photo = models.FileField(blank=True,null=True)
+    photo = models.FileField(blank=True,)
     author = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,

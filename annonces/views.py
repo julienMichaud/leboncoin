@@ -31,7 +31,7 @@ class OwnAnnonceListView(LoginRequiredMixin,ListView):
 
 class AnnonceUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model = Annonce
-    fields = ('title', 'category', 'price', 'description')
+    fields = ('title', 'category', 'price', 'description', 'photo')
     template_name = 'annonce_edit.html'
     login_url = 'login'
 
