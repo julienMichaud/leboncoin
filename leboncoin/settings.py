@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from .settings_local import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,10 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'storages',
     'pages.apps.PagesConfig',
     'accounts.apps.AccountsConfig',
-    'annonces.apps.AnnoncesConfig'
+    'annonces.apps.AnnoncesConfig',
+    'storages',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -133,8 +135,7 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_STORAGE_BUCKET_NAME = 'django-leboncoin'
-AWS_DEFAULT_ACL = None
+AWS_DEFAULT_ACL = 'public-read'
 AWS_S3_FILE_OVERWRITE = False
 AWS_IS_GZIPPED = True
 AWS_S3_OBJECT_PARAMETERS = {
@@ -144,8 +145,7 @@ AWS_LOCATION = 'files'
 
 AWS_S3_REGION_NAME = 'eu-west-3'
 
-AWS_ACCESS_KEY_ID = "id"
-AWS_SECRET_ACCESS_KEY = "key"
+
 AWS_S3_ENDPOINT_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.eu-west-3.amazonaws.com"
 STATIC_ROOT = 'static'
 MEDIA_ROOT = 'media'
