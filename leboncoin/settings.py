@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'annonces.apps.AnnoncesConfig',
     'storages',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

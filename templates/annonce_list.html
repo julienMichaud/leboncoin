@@ -3,16 +3,26 @@
 {% block title %}annonces{% endblock title %}
 
 {% block content %}
-  {% for annonce in object_list %}
+    <form action="" method="get">
+        {{ filter.form }}
+        <input type="submit" />
+    </form>
+    {% for annonce in filter.qs %}
     <div class="card">
       <div class="card-header">
         <span class="font-weight-bold">{{ annonce.title }}</span> &middot;
-        <span class="text-muted">by {{ annonce.author }} | {{ annonce.date }}</span>
+        <span class="text-muted">by {{ annonce.author }} </span> <span class="badge badge-light">{{ annonce.price }} €</span>
+        {% if annonce.photo %}
+          <img src="{{ annonce.photo.url }}" height="200" width="400"/>
+        {% else %}
+        <p> No image available ! </p>
+          {% endif %}
       </div>
       <div class="card-body">
-        <p>{{ annonce.body }}</p>
+        <p>{{ annonce.description }}</p>
+        {% comment %} <a href="{% url 'annonce_edit' annonce.pk %}" class="badge badge-info">Edit</a>
+        <a href="{% url 'annonce_delete' annonce.pk %}" class="badge badge-danger">Delete</a>  {% endcomment %}
       </div>
     </div>
-    <br />
-  {% endfor %}
+    {% endfor %}
 {% endblock content %}
