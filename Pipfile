@@ -12,6 +12,8 @@ boto3 = "*"
 django-storages = "*"
 django-environ = "*"
 django-filter = "*"
+channels = "*"
+channels-redis = "*"
 
 [requires]
 python_version = "3.7"
