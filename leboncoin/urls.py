@@ -1,5 +1,4 @@
 """leboncoin URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
 Examples:
@@ -15,7 +14,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from .api import router
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include ('django.contrib.auth.urls')),
@@ -23,4 +22,5 @@ urlpatterns = [
     path('annonces/', include('annonces.urls')),
     path('chat/', include('chat.urls')),
     path('', include('pages.urls')),
+    path('api/v1/', include(router.urls)),
 ]

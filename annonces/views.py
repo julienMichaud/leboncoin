@@ -5,7 +5,6 @@ from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
 from .models import Annonce
 from .filters import AnnonceFilter
-# Create your views here.
 
 class AnnonceCreateView(LoginRequiredMixin,CreateView):
     model = Annonce
