@@ -15,6 +15,7 @@ django-filter = "*"
 channels = "*"
 channels-redis = "*"
 djangorestframework = "*"
+djoser = "*"
 
 [requires]
 python_version = "3.7"

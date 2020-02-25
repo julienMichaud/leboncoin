@@ -14,7 +14,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
 from .api import router
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include ('django.contrib.auth.urls')),
@@ -23,4 +25,6 @@ urlpatterns = [
     path('chat/', include('chat.urls')),
     path('', include('pages.urls')),
     path('api/v1/', include(router.urls)),
+    url(r'^auth/', include('djoser.urls')),
+    url(r'^auth/', include('djoser.urls.authtoken')),
 ]
