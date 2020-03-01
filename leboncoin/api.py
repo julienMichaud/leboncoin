@@ -4,3 +4,4 @@ from annonces import api_views as annonces_views
 
 router = routers.DefaultRouter()
 router.register(r'annonces', annonces_views.AnnonceViewSet)
+router.register(r'myannonces', annonces_views.MyAnnonceViewSet, basename='MyModel')

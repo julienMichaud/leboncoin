@@ -25,6 +25,6 @@ urlpatterns = [
     path('chat/', include('chat.urls')),
     path('', include('pages.urls')),
     path('api/v1/', include(router.urls)),
-    url(r'^auth/', include('djoser.urls')),
-    url(r'^auth/', include('djoser.urls.authtoken')),
+    url(r'^api/v1/auth/', include('djoser.urls')),
+    url(r'^api/v1/auth/', include('djoser.urls.authtoken')),
 ]
